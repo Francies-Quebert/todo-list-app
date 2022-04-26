@@ -5,6 +5,9 @@ const todoReducer = createSlice({
   name: "todos",
   initialState,
   reducers: {
+    initialTodos: (state, action) => {
+      return action.payload;
+    },
     //here we will write our reducer
     //Adding todos
     addTodos: (state, action) => {
@@ -41,7 +44,7 @@ const todoReducer = createSlice({
     },
   },
 });
-export const { addTodos, removeTodos, updateTodos, completeTodos } =
+export const {initialTodos, addTodos, removeTodos, updateTodos, completeTodos } =
   todoReducer.actions;
 
 // The function below is called a selector and allows us to select a value from

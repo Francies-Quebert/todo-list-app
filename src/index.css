@@ -40,25 +40,29 @@
     @apply flex mb-4 mx-2;
   }
   .todo-input {
-    @apply flex-1 outline-none p-2 rounded-sm text-ascent text-lg;
+    @apply flex-1 outline-none p-2 rounded-sm text-ascent text-lg font-extrabold;
   }
   .add-btn {
-    @apply px-5 border rounded  ml-2 border-secondary text-3xl transition ease-in-out hover:bg-secondary;
+    @apply px-5 border rounded  ml-2 border-secondary bg-secondary text-3xl transition ease-in-out hover:bg-primary;
   }
   .display-todos {
     @apply text-center;
   }
   .display-todos .sort-btn {
-    @apply bg-tertiary text-center p-4 mx-4 rounded-sm text-lg font-medium transition active:bg-ascent-light min-w-[120px];
+    @apply bg-tertiary hover:bg-ascent-light text-center p-4 mx-4 rounded-sm text-lg font-medium transition active:bg-ascent-light min-w-[120px];
   }
 
   .display-cards {
-    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 p-4 ;
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 p-4;
   }
-  .card{
-    @apply bg-white rounded-sm;
+  .card {
+    @apply bg-white rounded-sm relative min-h-[250px];
   }
-  .btns button{
-    @apply mx-4 my-2 bg-ascent-light min-w-[40px] rounded-sm px-2 py-1 font-bold;
+  .btns button {
+    @apply mx-4 my-2 bg-ascent-light  min-w-[40px] rounded-sm px-2 py-1 font-bold;
+  }
+
+  .completed {
+    @apply bg-green-600 text-white absolute top-[0.3rem] right-[0.3rem] border border-ascent text-[0.8rem] px-[0.3rem] py-[0.1rem] font-bold rounded-md;
   }
 }
