@@ -1,13 +1,64 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./assets/fonts/helvetica-neu.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+  body {
+    margin: 0;
+    font: 300 11px/1.4 "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: block;
+    min-height: 100vh;
+  }
+  #root,
+  #root > div {
+    height: 100%;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .app {
+    @apply bg-primary;
+  }
+
+  .app-header {
+    @apply text-3xl py-4 font-extrabold text-center;
+  }
+  .addTodos {
+    @apply flex mb-4 mx-2;
+  }
+  .todo-input {
+    @apply flex-1 outline-none p-2 rounded-sm text-ascent text-lg;
+  }
+  .add-btn {
+    @apply px-5 border rounded  ml-2 border-secondary text-3xl transition ease-in-out hover:bg-secondary;
+  }
+  .display-todos {
+    @apply text-center;
+  }
+  .display-todos .sort-btn {
+    @apply bg-tertiary text-center p-4 mx-4 rounded-sm text-lg font-medium transition active:bg-ascent-light min-w-[120px];
+  }
+
+  .display-cards {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 p-4 ;
+  }
+  .card{
+    @apply bg-white rounded-sm;
+  }
+  .btns button{
+    @apply mx-4 my-2 bg-ascent-light min-w-[40px] rounded-sm px-2 py-1 font-bold;
+  }
 }
