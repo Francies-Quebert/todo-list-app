@@ -25,7 +25,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const DisplayTodos = (props) => {
   const [sort, setSort] = useState("active");
-  console.log(props);
   return (
     <div className="display-todos">
       <div className="buttons">

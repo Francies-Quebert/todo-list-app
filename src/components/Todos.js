@@ -1,6 +1,16 @@
-import React, { useState } from "react";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  Timestamp,
+} from "firebase/firestore";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addTodos } from "../store/reducer";
+import { db } from "../config/firebase";
+import { addTodos, initialTodos } from "../store/reducer";
+import Spinner from "./Spinner";
 
 const mapStateToProps = (state) => {
   return {
@@ -10,30 +20,62 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    initialTodos: (todo) => dispatch(initialTodos(todo)),
     addTodo: (obj) => dispatch(addTodos(obj)),
   };
 };
 
 const Todos = (props) => {
   const [todo, setTodo] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+//load data on initial load 
+  const initialLoad = async () => {
+    setIsLoading(true);
+    const dbRef = collection(db, "todo-list");
+    const q = query(dbRef, orderBy("created"));
+
+    const data = (await getDocs(q)).docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    props.initialTodos(data);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    initialLoad();
+  }, []);
 
   const handleChange = (e) => {
     setTodo(e.target.value);
   };
-
-  const add = () => {
+// add a todo
+  const add = async () => {
+    setIsLoading(true);
     if (todo === "") {
       alert("Input is Empty");
     } else {
-      props.addTodo({
-        id: Math.floor(Math.random() * 1000),
-        item: todo,
-        completed: false,
-      });
-      setTodo("");
+      try {
+        await addDoc(collection(db, "todo-list"), {
+          item: todo,
+          completed: false,
+          created: Timestamp.now(),
+        }).then(function (docRef) {
+          props.addTodo({
+            id: docRef.id,
+            item: todo,
+            completed: false,
+          });
+        });
+
+        setTodo("");
+      } catch (err) {
+        alert(err);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
-  //console.log("props from store", props);
   return (
     <div className="addTodos">
       <input
@@ -43,8 +85,12 @@ const Todos = (props) => {
         value={todo}
       />
 
-      <button className="add-btn" onClick={() => add()}>
-        +
+      <button
+        className="add-btn"
+        onClick={() => add()}
+        disabled={!todo || isLoading}
+      >
+        {!isLoading ? "+" : <Spinner color="ascent-light" />}
       </button>
       <br />
     </div>
