@@ -4,7 +4,7 @@ This repository contains code for Todo app with react-redux.
 View Demo: 
 
 Available Scripts
-In the project directory, you can run:
+In the project directory, you can run: https://todo-list-e689f.firebaseapp.com/
 
 npm start
 Runs the app in the development mode.
