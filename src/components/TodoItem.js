@@ -8,7 +8,7 @@ const TodoItem = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(true);
 
- // updating the todo  
+  // updating the todo
   const update = (id, value) => {
     if (inputRef.current.disabled) {
       inputRef.current.disabled = false;
@@ -58,13 +58,14 @@ const TodoItem = (props) => {
         ref={inputRef}
         disabled={inputRef}
         defaultValue={item.item}
+      
       />
       <div className="btns w-full">
         <button
           className="text-blue-600"
           onClick={() => update(item.id, inputRef.current.value)}
         >
-          Edit
+          Edit / Save
         </button>
         {item.completed === false && (
           <button
