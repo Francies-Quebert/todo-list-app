@@ -33,6 +33,7 @@ const TodoItem = (props) => {
       inputRef.current.disabled = true;
     }
   };
+  //delete the todo
 
   const deleteTodo = async (id) => {
     setIsLoading(true);
